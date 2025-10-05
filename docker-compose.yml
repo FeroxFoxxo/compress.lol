@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  compress-lol:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    volumes:
+      - app-data:/usr/src/app/data
+    networks:
+      - compress-network
+
+volumes:
+  app-data:
+
+networks:
+  compress-network:
+    driver: bridge
